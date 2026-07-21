@@ -1,6 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, MessageCircle, MapPin } from "lucide-react";
+import { MessageCircle, MapPin } from "lucide-react";
+
+/**
+ * Ícone do Instagram como SVG inline — a lucide-react removeu ícones de
+ * marcas registradas das versões mais recentes, então não dá pra importar
+ * "Instagram" de lá.
+ */
+function InstagramIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   return (
@@ -82,7 +107,7 @@ export default function Footer() {
               aria-label="Instagram da Thays Flor"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-cream/20"
             >
-              <Instagram size={18} />
+              <InstagramIcon size={18} />
             </a>
             <a
               href="https://wa.me/5500000000000"
