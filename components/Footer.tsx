@@ -88,7 +88,7 @@ export default function Footer() {
                 className="flex items-center gap-2.5 font-sans text-sm text-cream/75 transition-colors hover:text-cream"
               >
                 <MessageCircle size={17} />
-                (00) 00000-0000
+                (85) 98218-9877
               </a>
             </li>
           </ul>
