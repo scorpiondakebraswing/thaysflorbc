@@ -1,0 +1,41 @@
+/* ============================================================
+   THAYS FLOR — Design Tokens
+   Cole este bloco no topo do seu app/globals.css existente,
+   ANTES ou DEPOIS do @import "tailwindcss";
+   (Tailwind CSS v4 — sem tailwind.config.js necessário)
+   ============================================================ */
+
+@import "tailwindcss";
+
+@theme {
+  /* Paleta — Vinho (primária) */
+  --color-wine-900: #3E1220;
+  --color-wine-800: #4A1625;
+  --color-wine-700: #6E2439;
+  --color-wine-600: #833051;
+  --color-wine-500: #93435F;
+  --color-wine-400: #B06880;
+  --color-wine-100: #F3E4E8;
+
+  /* Paleta — Neutros / apoio */
+  --color-cream: #FBF7F2;
+  --color-nude: #F1E4DA;
+  --color-stone-100: #F5F3F1;
+  --color-stone-200: #E9E4DF;
+  --color-ink: #2B2320;
+  --color-ink-soft: #5C4F49;
+
+  /* Tipografia */
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
