@@ -1,26 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Paleta — Vinho (primária) */
+  --color-wine-900: #3E1220;
+  --color-wine-800: #4A1625;
+  --color-wine-700: #6E2439;
+  --color-wine-600: #833051;
+  --color-wine-500: #93435F;
+  --color-wine-400: #B06880;
+  --color-wine-100: #F3E4E8;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Paleta — Neutros / apoio */
+  --color-cream: #FBF7F2;
+  --color-nude: #F1E4DA;
+  --color-stone-100: #F5F3F1;
+  --color-stone-200: #E9E4DF;
+  --color-ink: #2B2320;
+  --color-ink-soft: #5C4F49;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Tipografia — herda o stack real vindo do next/font (definido no layout.tsx) */
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
