@@ -1,15 +1,15 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import PetalMotif from "./PetalMotif";
 
-const fadeUp: Variants = {
+const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const, delay: i * 0.12 },
+    transition: { duration: 0.7, ease: "easeOut", delay: i * 0.12 },
   }),
 };
 
@@ -55,7 +55,7 @@ export default function Hero() {
             className="mt-6 max-w-lg font-sans text-lg leading-relaxed text-ink-soft"
           >
             Tratamentos estéticos avançados guiados por técnica apurada e
-            olhar humanizado — para resultados naturais que respeitam a sua
+            olhar humanizado, para resultados naturais que respeitam a sua
             essência.
           </motion.p>
 
@@ -93,7 +93,7 @@ export default function Hero() {
             &ldquo;Beleza que se constrói com cuidado, técnica e escuta.&rdquo;
           </p>
           <span className="mt-4 font-sans text-sm font-medium tracking-wide text-cream/70">
-            — Equipe Thays Flor
+            - Equipe Thays Flor
           </span>
         </motion.div>
       </div>

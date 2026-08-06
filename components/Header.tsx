@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Início", href: "#inicio" },
   { label: "Sobre", href: "#sobre" },
   { label: "Procedimentos", href: "#procedimentos" },
+  { label: "Depoimentos", href: "#depoimentos" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -37,7 +38,7 @@ export default function Header() {
         <Link href="#inicio" className="flex items-center gap-2 shrink-0">
           <Image
             src="https://conexaojunina.com.br/wp-content/uploads/2026/07/LOGO-THAYS-FLOR-VINHO-3.png"
-            alt="Thays Flor — Clínica de Estética"
+            alt="Thays Flor | Clínica de Estética"
             width={150}
             height={56}
             priority

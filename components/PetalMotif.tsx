@@ -3,7 +3,7 @@ type PetalMotifProps = {
 };
 
 /**
- * Elemento de assinatura visual da marca — uma pétala/linha orgânica minimalista.
+ * Elemento de assinatura visual da marca: uma pétala/linha orgânica minimalista.
  * Usado como acento decorativo (não como ícone funcional).
  */
 export default function PetalMotif({ className = "" }: PetalMotifProps) {

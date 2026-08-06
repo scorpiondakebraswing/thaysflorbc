@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { Sparkles, Syringe, Droplets, Gem, Waves } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Sparkles, Syringe, Droplets, Gem, Waves, Snowflake } from "lucide-react";
 import Link from "next/link";
 
 type Procedure = {
@@ -9,6 +10,8 @@ type Procedure = {
   title: string;
   description: string;
   href: string;
+  image?: string;
+  isNew?: boolean;
 };
 
 const PROCEDURES: Procedure[] = [
@@ -47,20 +50,26 @@ const PROCEDURES: Procedure[] = [
       "Estímulo de colágeno para firmeza e qualidade de pele a médio e longo prazo.",
     href: "/procedimentos/bioestimuladores",
   },
+  {
+    icon: Snowflake,
+    title: "Criolipólise",
+    description:
+      "Tratamento para gordura localizada e melhora do contorno corporal. Atua pelo congelamento das células de gordura, reduzindo o volume de forma progressiva e natural, sem cortes, agulhas ou anestesia, com retorno imediato às atividades do dia a dia.",
+    href: "/procedimentos/criolipolise",
+    image:
+      "https://conexaojunina.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-17.56.18.jpeg",
+    isNew: true,
+  },
 ];
 
-const containerVariants: Variants = {
+const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const cardVariants: Variants = {
+const cardVariants = {
   hidden: { opacity: 0, y: 26 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 export default function Procedures() {
@@ -97,15 +106,33 @@ export default function Procedures() {
           viewport={{ once: true, amount: 0.2 }}
           className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {PROCEDURES.map(({ icon: Icon, title, description, href }) => (
+          {PROCEDURES.map(({ icon: Icon, title, description, href, image, isNew }) => (
             <motion.div
               key={title}
               variants={cardVariants}
-              className="group flex flex-col rounded-[1.75rem] border border-stone-200 bg-stone-100 p-8 transition-shadow hover:shadow-lg"
+              className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-stone-200 bg-stone-100 p-8 transition-shadow hover:shadow-lg"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-wine-100 text-wine-700 transition-colors group-hover:bg-wine-700 group-hover:text-cream">
-                <Icon size={22} strokeWidth={1.75} />
-              </div>
+              {isNew && (
+                <span className="absolute right-6 top-6 rounded-full bg-wine-700 px-3 py-1 font-sans text-xs font-semibold text-cream">
+                  Novidade
+                </span>
+              )}
+
+              {image ? (
+                <div className="relative -mx-8 -mt-8 mb-6 h-44 w-[calc(100%+4rem)] overflow-hidden">
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-wine-100 text-wine-700 transition-colors group-hover:bg-wine-700 group-hover:text-cream">
+                  <Icon size={22} strokeWidth={1.75} />
+                </div>
+              )}
+
               <h3 className="mt-6 font-display text-xl text-wine-900">
                 {title}
               </h3>

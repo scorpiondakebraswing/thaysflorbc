@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
-const fadeUp: Variants = {
+const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const, delay: i * 0.1 },
+    transition: { duration: 0.7, ease: "easeOut", delay: i * 0.1 },
   }),
 };
 
@@ -36,7 +36,7 @@ export default function About() {
           <div className="absolute -inset-4 -z-10 rounded-[2.5rem] border border-wine-700/20" />
           <div className="overflow-hidden rounded-[2rem] shadow-xl">
             <Image
-              src="https://conexaojunina.com.br/wp-content/uploads/2026/07/Picsart_26-07-21_10-38-03-555.png"
+              src="https://conexaojunina.com.br/wp-content/uploads/2026/08/thays1.png"
               alt="Especialista responsável pela clínica Thays Flor"
               width={640}
               height={800}
@@ -80,7 +80,7 @@ export default function About() {
             Por trás da Thays Flor está uma especialista dedicada a unir
             ciência e sensibilidade em cada atendimento. Cada plano de
             tratamento nasce de uma escuta atenta às necessidades e desejos
-            de quem chega até a clínica — para que o resultado seja, acima
+            de quem chega até a clínica, para que o resultado seja, acima
             de tudo, autêntico.
           </motion.p>
 

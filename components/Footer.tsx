@@ -1,31 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, MapPin } from "lucide-react";
-
-/**
- * Ícone do Instagram como SVG inline — a lucide-react removeu ícones de
- * marcas registradas das versões mais recentes, então não dá pra importar
- * "Instagram" de lá.
- */
-function InstagramIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
+import { Instagram, MessageCircle, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -35,7 +10,7 @@ export default function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Image
             src="https://conexaojunina.com.br/wp-content/uploads/2026/07/LOGO-THAYS-FLOR-VINHO-3.png"
-            alt="Thays Flor — Clínica de Estética"
+            alt="Thays Flor | Clínica de Estética"
             width={140}
             height={52}
             className="h-10 w-auto brightness-0 invert"
@@ -78,17 +53,17 @@ export default function Footer() {
           <ul className="mt-4 flex flex-col gap-3">
             <li className="flex items-start gap-2.5 font-sans text-sm text-cream/75">
               <MapPin size={17} className="mt-0.5 shrink-0" />
-              Lagoa do Mato, Itatira/CE
+              Rua Exemplo, 123, Centro, Sua Cidade/UF
             </li>
             <li>
               <a
-                href="https://wa.me/558888048009"
+                href="https://wa.me/5500000000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 font-sans text-sm text-cream/75 transition-colors hover:text-cream"
               >
                 <MessageCircle size={17} />
-                (85) 98218-9877
+                (00) 00000-0000
               </a>
             </li>
           </ul>
@@ -101,16 +76,16 @@ export default function Footer() {
           </h4>
           <div className="mt-4 flex gap-3">
             <a
-              href="https://instagram.com/tfbeautyclinic"
+              href="https://instagram.com/thaysflor"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram da Thays Flor"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-cream/20"
             >
-              <InstagramIcon size={18} />
+              <Instagram size={18} />
             </a>
             <a
-              href="https://wa.me/558888048009"
+              href="https://wa.me/5500000000000"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp da Thays Flor"
