@@ -34,7 +34,7 @@ export async function cadastrar(formData: FormData) {
 
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -48,5 +48,13 @@ export async function cadastrar(formData: FormData) {
     redirect(`/cadastro?erro=${encodeURIComponent(error.message)}`);
   }
 
+  // Com a confirmação de email desativada no Supabase, o signUp já retorna
+  // uma sessão ativa, então o cliente entra direto, sem precisar confirmar.
+  if (data.session) {
+    redirect("/agendar");
+  }
+
+  // Fallback: se algum dia a confirmação de email for reativada no Supabase,
+  // isso volta a funcionar sem precisar mexer no código de novo.
   redirect("/cadastro/confirme-seu-email");
 }

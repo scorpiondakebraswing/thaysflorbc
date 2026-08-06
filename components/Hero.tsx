@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import PetalMotif from "./PetalMotif";
@@ -86,15 +87,24 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
-          className="relative hidden aspect-[4/5] w-full max-w-md justify-self-center rounded-[2rem] bg-gradient-to-br from-wine-700 to-wine-900 p-8 shadow-xl lg:flex lg:flex-col lg:justify-end"
+          className="relative hidden aspect-[4/5] w-full max-w-md justify-self-center overflow-hidden rounded-[2rem] shadow-xl lg:flex lg:flex-col lg:justify-end"
         >
-          <PetalMotif className="absolute right-6 top-6 h-16 w-16 text-cream/25" />
-          <p className="font-display text-2xl italic leading-snug text-cream">
-            &ldquo;Beleza que se constrói com cuidado, técnica e escuta.&rdquo;
-          </p>
-          <span className="mt-4 font-sans text-sm font-medium tracking-wide text-cream/70">
-            - Equipe Thays Flor
-          </span>
+          <Image
+            src="https://conexaojunina.com.br/wp-content/uploads/2026/08/thays2.png"
+            alt="Thays Flor"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-wine-900/95 via-wine-900/30 to-transparent" />
+          <PetalMotif className="absolute right-6 top-6 h-16 w-16 text-cream/40" />
+          <div className="relative flex flex-col p-8">
+            <p className="font-display text-2xl italic leading-snug text-cream">
+              &ldquo;Beleza que se constrói com cuidado, técnica e escuta.&rdquo;
+            </p>
+            <span className="mt-4 font-sans text-sm font-medium tracking-wide text-cream/70">
+              - Equipe Thays Flor
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>
