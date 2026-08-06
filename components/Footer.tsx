@@ -78,17 +78,17 @@ export default function Footer() {
           <ul className="mt-4 flex flex-col gap-3">
             <li className="flex items-start gap-2.5 font-sans text-sm text-cream/75">
               <MapPin size={17} className="mt-0.5 shrink-0" />
-              Rua Exemplo, 123, Centro, Sua Cidade/UF
+              Posto Nossa Senhora do Carmo, Lagoa do Mato, Itatira/CE
             </li>
             <li>
               <a
-                href="https://wa.me/5500000000000"
+                href="https://wa.me/558888048009"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 font-sans text-sm text-cream/75 transition-colors hover:text-cream"
               >
                 <MessageCircle size={17} />
-                (00) 00000-0000
+                +55 88 8804-8009
               </a>
             </li>
           </ul>
@@ -101,7 +101,7 @@ export default function Footer() {
           </h4>
           <div className="mt-4 flex gap-3">
             <a
-              href="https://instagram.com/thaysflor"
+              href="https://www.instagram.com/tfbeautyclinic"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram da Thays Flor"
@@ -110,7 +110,7 @@ export default function Footer() {
               <InstagramIcon size={18} />
             </a>
             <a
-              href="https://wa.me/5500000000000"
+              href="https://wa.me/558888048009"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp da Thays Flor"

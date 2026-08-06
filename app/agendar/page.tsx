@@ -1,11 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { logout } from "@/app/login/actions";
-import AdminCalendarManager from "./AdminCalendarManager";
-import AppointmentsPanel from "./AppointmentsPanel";
-import FeedbackManager from "./FeedbackManager";
+import BookingCalendar from "./BookingCalendar";
+import MyAppointmentsList from "./MyAppointmentsList";
 
-export default async function AdminPage() {
+export default async function AgendamentoPage() {
   const supabase = await createClient();
 
   const {
@@ -16,14 +15,11 @@ export default async function AdminPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("full_name")
     .eq("id", user.id)
     .single();
 
-  // Segunda camada de proteção (o middleware já cobre isso, mas nunca custa).
-  if (profile?.role !== "admin") redirect("/agendar");
-
-  const { data: freeSlots } = await supabase
+  const { data: availableSlots } = await supabase
     .from("availability_slots")
     .select("id, slot_date, slot_time")
     .eq("is_available", true)
@@ -33,32 +29,21 @@ export default async function AdminPage() {
 
   const { data: rawAppointments } = await supabase
     .from("appointments")
-    .select(
-      "id, status, slot_id, availability_slots(slot_date, slot_time), profiles(full_name, whatsapp)"
-    )
+    .select("id, status, slot_id, availability_slots(slot_date, slot_time)")
+    .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
-  const appointments = (rawAppointments || []).map((ag) => {
+  const myAppointments = (rawAppointments || []).map((ag) => {
     const slot = Array.isArray(ag.availability_slots)
       ? ag.availability_slots[0]
       : ag.availability_slots;
-    const prof = Array.isArray(ag.profiles) ? ag.profiles[0] : ag.profiles;
-
     return {
       id: ag.id,
       status: ag.status,
-      slot_id: ag.slot_id,
       slot_date: slot?.slot_date ?? "",
       slot_time: slot?.slot_time ?? "",
-      full_name: prof?.full_name ?? null,
-      whatsapp: prof?.whatsapp ?? null,
     };
   });
-
-  const { data: feedbacks } = await supabase
-    .from("feedbacks")
-    .select("id, author_name, message, avatar_url")
-    .order("created_at", { ascending: false });
 
   return (
     <main className="min-h-screen bg-cream px-5 py-12 sm:px-8 sm:py-16">
@@ -66,9 +51,11 @@ export default async function AdminPage() {
         <div className="flex items-center justify-between">
           <div>
             <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-wine-700">
-              Painel Administrativo
+              Área do Cliente
             </p>
-            <h1 className="mt-1 font-display text-3xl text-wine-900">Agenda</h1>
+            <h1 className="mt-1 font-display text-3xl text-wine-900">
+              Olá, {profile?.full_name?.split(" ")[0] || "bem-vinda"}
+            </h1>
           </div>
           <form action={logout}>
             <button
@@ -81,23 +68,15 @@ export default async function AdminPage() {
         </div>
 
         <section className="mt-10">
-          <h2 className="font-display text-xl text-wine-900">
-            Horários disponíveis para agendamento
-          </h2>
+          <h2 className="font-display text-xl text-wine-900">Agendar novo horário</h2>
           <div className="mt-4">
-            <AdminCalendarManager slots={freeSlots || []} />
+            <BookingCalendar availableSlots={availableSlots || []} />
           </div>
         </section>
 
         <section className="mt-12">
-          <AppointmentsPanel appointments={appointments} />
-        </section>
-
-        <section className="mt-12">
-          <h2 className="font-display text-xl text-wine-900">Depoimentos</h2>
-          <div className="mt-4">
-            <FeedbackManager feedbacks={feedbacks || []} />
-          </div>
+          <h2 className="font-display text-xl text-wine-900">Meus agendamentos</h2>
+          <MyAppointmentsList appointments={myAppointments} />
         </section>
       </div>
     </main>

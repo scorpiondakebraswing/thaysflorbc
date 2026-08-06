@@ -20,42 +20,42 @@ const PROCEDURES: Procedure[] = [
     title: "Harmonização Facial",
     description:
       "Equilíbrio entre as proporções do rosto, valorizando traços naturais com técnica refinada.",
-    href: "/procedimentos/harmonizacao-facial",
+    href: "/harmonizacao-facial",
   },
   {
     icon: Syringe,
     title: "Botox",
     description:
       "Suavização de linhas de expressão com resultado natural e efeito rejuvenescedor.",
-    href: "/procedimentos/botox",
+    href: "/botox",
   },
   {
     icon: Waves,
     title: "Lavieen",
     description:
       "Tecnologia para uniformizar a textura e o viço da pele, com toque macio e sedoso.",
-    href: "/procedimentos/lavieen",
+    href: "/lavieen",
   },
   {
     icon: Droplets,
     title: "Preenchimento",
     description:
       "Devolve volume e contorno em regiões específicas, respeitando a harmonia facial.",
-    href: "/procedimentos/preenchimento",
+    href: "/preenchimento",
   },
   {
     icon: Gem,
     title: "Bioestimuladores",
     description:
       "Estímulo de colágeno para firmeza e qualidade de pele a médio e longo prazo.",
-    href: "/procedimentos/bioestimuladores",
+    href: "/bioestimuladores",
   },
   {
     icon: Snowflake,
     title: "Criolipólise",
     description:
       "Tratamento para gordura localizada e melhora do contorno corporal. Atua pelo congelamento das células de gordura, reduzindo o volume de forma progressiva e natural, sem cortes, agulhas ou anestesia, com retorno imediato às atividades do dia a dia.",
-    href: "/procedimentos/criolipolise",
+    href: "/criolipolise",
     image:
       "https://conexaojunina.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-17.56.18.jpeg",
     isNew: true,
@@ -123,12 +123,12 @@ export default function Procedures() {
               )}
 
               {image ? (
-                <div className="relative -mx-8 -mt-8 mb-6 h-44 w-[calc(100%+4rem)] overflow-hidden">
+                <div className="relative -mx-8 -mt-8 mb-6 h-56 w-[calc(100%+4rem)] overflow-hidden">
                   <Image
                     src={image}
                     alt={title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                 </div>
               ) : (
@@ -168,7 +168,7 @@ export default function Procedures() {
               você.
             </p>
             <Link
-              href="/agendamento"
+              href="/agendar"
               className="mt-6 inline-flex w-fit items-center rounded-full bg-cream px-6 py-3 font-sans text-sm font-semibold text-wine-800 transition-transform hover:scale-[1.03]"
             >
               Agendar Consulta

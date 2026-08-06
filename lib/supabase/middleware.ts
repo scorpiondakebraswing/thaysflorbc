@@ -30,7 +30,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isProtected = path.startsWith("/agendamento") || path.startsWith("/admin");
+  const isProtected = path.startsWith("/agendar") || path.startsWith("/admin");
 
   // Não logado tentando acessar área protegida → manda pro login.
   if (!user && isProtected) {
@@ -50,7 +50,7 @@ export async function updateSession(request: NextRequest) {
 
     if (profile?.role !== "admin") {
       const url = request.nextUrl.clone();
-      url.pathname = "/agendamento";
+      url.pathname = "/agendar";
       return NextResponse.redirect(url);
     }
   }

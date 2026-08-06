@@ -33,7 +33,7 @@ export default async function LoginPage({
         )}
 
         <form action={login} className="mt-7 flex flex-col gap-4">
-          <input type="hidden" name="redirect" value={redirect || "/agendamento"} />
+          <input type="hidden" name="redirect" value={redirect || "/agendar"} />
 
           <div>
             <label className="mb-1.5 block font-sans text-sm font-medium text-ink">

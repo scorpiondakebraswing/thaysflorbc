@@ -67,7 +67,7 @@ export default function Hero() {
             className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
           >
             <Link
-              href="/agendamento"
+              href="/agendar"
               className="rounded-full bg-wine-700 px-8 py-4 text-center font-sans text-[15px] font-semibold text-cream shadow-md transition-all hover:bg-wine-800 hover:shadow-lg active:scale-[0.98]"
             >
               Agendar Consulta

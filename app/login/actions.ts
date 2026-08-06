@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export async function login(formData: FormData) {
   const email = String(formData.get("email") || "").trim();
   const password = String(formData.get("password") || "");
-  const redirectTo = String(formData.get("redirect") || "/agendamento");
+  const redirectTo = String(formData.get("redirect") || "/agendar");
 
   if (!email || !password) {
     redirect(`/login?erro=${encodeURIComponent("Preencha email e senha.")}`);

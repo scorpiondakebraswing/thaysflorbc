@@ -65,7 +65,7 @@ export async function criarHorario(data: { date: string; time: string }) {
   }
 
   revalidatePath("/admin");
-  revalidatePath("/agendamento");
+  revalidatePath("/agendar");
   return { success: true };
 }
 
@@ -79,7 +79,7 @@ export async function removerHorario(slotId: string) {
   }
 
   revalidatePath("/admin");
-  revalidatePath("/agendamento");
+  revalidatePath("/agendar");
   return { success: true };
 }
 
@@ -94,7 +94,7 @@ export async function aprovarAgendamento(appointmentId: string) {
   if (error) return { error: error.message };
 
   revalidatePath("/admin");
-  revalidatePath("/agendamento");
+  revalidatePath("/agendar");
 
   // Dispara o WhatsApp sem travar a resposta da aprovação, caso falhe.
   const { data: agendamento } = await supabase
@@ -148,7 +148,7 @@ export async function rejeitarAgendamento(appointmentId: string, slotId: string)
   await supabase.from("availability_slots").update({ is_available: true }).eq("id", slotId);
 
   revalidatePath("/admin");
-  revalidatePath("/agendamento");
+  revalidatePath("/agendar");
 
   if (agendamento) {
     const slot = Array.isArray(agendamento.availability_slots)
