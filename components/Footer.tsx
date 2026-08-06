@@ -82,7 +82,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://wa.me/558582189877"
+                href="https://wa.me/558888048009"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 font-sans text-sm text-cream/75 transition-colors hover:text-cream"
@@ -110,7 +110,7 @@ export default function Footer() {
               <InstagramIcon size={18} />
             </a>
             <a
-              href="https://wa.me/5500000000000"
+              href="https://wa.me/558888048009"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp da Thays Flor"

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Thays Flor | Clínica de Estética Avançada",
   description:
-    "Tratamentos estéticos avançados guiados por técnica apurada e cuidado humanizado — harmonização facial, botox, preenchimento e mais.",
+    "Tratamentos estéticos avançados guiados por técnica apurada e cuidado humanizado. Harmonização facial, botox, preenchimento e mais.",
   openGraph: {
     title: "Thays Flor | Clínica de Estética Avançada",
     description:
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_URL,
-        alt: "Thays Flor — Clínica de Estética",
+        alt: "Thays Flor | Clínica de Estética",
       },
     ],
   },
