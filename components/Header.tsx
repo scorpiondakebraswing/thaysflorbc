@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { label: "Início", href: "#inicio" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Procedimentos", href: "#procedimentos" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Contato", href: "#contato" },
+  { label: "Início", href: "/#inicio" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Procedimentos", href: "/#procedimentos" },
+  { label: "Depoimentos", href: "/#depoimentos" },
+  { label: "Contato", href: "/#contato" },
 ];
 
 export default function Header() {
@@ -35,7 +35,7 @@ export default function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
         {/* Logo */}
-        <Link href="#inicio" className="flex items-center gap-2 shrink-0">
+        <Link href="/#inicio" className="flex items-center gap-2 shrink-0">
           <Image
             src="https://conexaojunina.com.br/wp-content/uploads/2026/07/LOGO-THAYS-FLOR-VINHO-3.png"
             alt="Thays Flor | Clínica de Estética"

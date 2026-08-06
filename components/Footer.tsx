@@ -53,9 +53,9 @@ export default function Footer() {
           </h4>
           <ul className="mt-4 flex flex-col gap-2.5">
             {[
-              { label: "Início", href: "#inicio" },
-              { label: "Sobre", href: "#sobre" },
-              { label: "Procedimentos", href: "#procedimentos" },
+              { label: "Início", href: "/#inicio" },
+              { label: "Sobre", href: "/#sobre" },
+              { label: "Procedimentos", href: "/#procedimentos" },
               { label: "Entrar", href: "/login" },
             ].map((link) => (
               <li key={link.label}>

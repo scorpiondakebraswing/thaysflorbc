@@ -74,7 +74,7 @@ export default function Hero() {
               Agendar Consulta
             </Link>
             <a
-              href="#procedimentos"
+              href="/#procedimentos"
               className="rounded-full border border-wine-700/25 px-8 py-4 text-center font-sans text-[15px] font-semibold text-wine-800 transition-colors hover:bg-wine-100 active:scale-[0.98]"
             >
               Conhecer Procedimentos
