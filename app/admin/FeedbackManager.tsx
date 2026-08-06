@@ -33,7 +33,9 @@ export default function FeedbackManager({ feedbacks }: { feedbacks: Feedback[] }
   }
 
   function handleRemover(id: string) {
-    startTransition(() => removerFeedback(id));
+    startTransition(() => {
+      removerFeedback(id);
+    });
   }
 
   return (

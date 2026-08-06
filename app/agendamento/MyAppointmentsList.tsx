@@ -34,7 +34,9 @@ export default function MyAppointmentsList({
 
   function handleCancelar(id: string) {
     if (!confirm("Tem certeza que quer cancelar esse agendamento?")) return;
-    startTransition(() => cancelarAgendamento(id));
+    startTransition(() => {
+      cancelarAgendamento(id);
+    });
   }
 
   if (appointments.length === 0) {

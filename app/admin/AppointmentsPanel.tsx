@@ -39,11 +39,15 @@ export default function AppointmentsPanel({
   const outros = appointments.filter((a) => a.status !== "pending");
 
   function handleAprovar(id: string) {
-    startTransition(() => aprovarAgendamento(id));
+    startTransition(() => {
+      aprovarAgendamento(id);
+    });
   }
 
   function handleRejeitar(id: string, slotId: string) {
-    startTransition(() => rejeitarAgendamento(id, slotId));
+    startTransition(() => {
+      rejeitarAgendamento(id, slotId);
+    });
   }
 
   return (
