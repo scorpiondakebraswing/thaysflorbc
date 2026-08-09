@@ -18,7 +18,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[92vh] items-center overflow-hidden bg-cream pt-28 sm:pt-24"
+      className="relative flex items-center overflow-hidden bg-cream py-16 pt-28 sm:pt-24 lg:min-h-[92vh] lg:py-0"
     >
       {/* Assinatura visual decorativa */}
       <PetalMotif className="pointer-events-none absolute -right-16 top-16 h-[420px] w-[420px] text-wine-700/[0.06] sm:h-[560px] sm:w-[560px]" />
@@ -87,7 +87,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
-          className="relative hidden aspect-[4/5] w-full max-w-md justify-self-center overflow-hidden rounded-[2rem] shadow-xl lg:flex lg:flex-col lg:justify-end"
+          className="relative flex aspect-[3/4] w-full max-w-md flex-col justify-end justify-self-center overflow-hidden rounded-[2rem] shadow-xl sm:aspect-[4/5]"
         >
           <Image
             src="https://conexaojunina.com.br/wp-content/uploads/2026/08/thays2.png"
