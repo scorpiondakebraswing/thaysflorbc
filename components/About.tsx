@@ -12,12 +12,6 @@ const fadeUp: Variants = {
   }),
 };
 
-const HIGHLIGHTS = [
-  "Técnica atualizada e protocolos seguros",
-  "Atendimento individualizado, do diagnóstico ao pós",
-  "Resultados naturais e harmônicos",
-];
-
 export default function About() {
   return (
     <section
@@ -37,7 +31,7 @@ export default function About() {
           <div className="overflow-hidden rounded-[2rem] shadow-xl">
             <Image
               src="https://conexaojunina.com.br/wp-content/uploads/2026/08/thays1.png"
-              alt="Especialista responsável pela clínica Thays Flor"
+              alt="Thays Flor, fisioterapeuta e especialista em cuidados estéticos"
               width={640}
               height={800}
               className="h-full w-full object-cover"
@@ -66,7 +60,7 @@ export default function About() {
             custom={1}
             className="font-display text-3xl leading-tight text-wine-900 sm:text-4xl"
           >
-            Técnica apurada, cuidado genuinamente humano
+            Ciência, sensibilidade e um olhar atento para cada detalhe
           </motion.h2>
 
           <motion.p
@@ -77,28 +71,34 @@ export default function About() {
             custom={2}
             className="mt-6 font-sans text-[17px] leading-relaxed text-ink-soft"
           >
-            Por trás da Thays Flor está uma especialista dedicada a unir
-            ciência e sensibilidade em cada atendimento. Cada plano de
-            tratamento nasce de uma escuta atenta às necessidades e desejos
-            de quem chega até a clínica, para que o resultado seja, acima
-            de tudo, autêntico.
+            Por trás da TF Beauty Clinic está Thays Flor, fisioterapeuta e
+            especialista em cuidados estéticos, apaixonada por transformar
+            conhecimento e técnica em experiências de cuidado que fazem
+            sentido para cada pessoa.
           </motion.p>
 
-          <motion.ul
+          <motion.blockquote
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
             variants={fadeUp}
             custom={3}
-            className="mt-8 flex flex-col gap-3"
+            className="mt-8 border-l-2 border-wine-700 pl-6"
           >
-            {HIGHLIGHTS.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-wine-700" />
-                <span className="font-sans text-[15px] text-ink">{item}</span>
-              </li>
-            ))}
-          </motion.ul>
+            <p className="font-display text-xl italic leading-relaxed text-wine-900 sm:text-[1.4rem]">
+              &ldquo;Acredito que estética vai muito além de aparência. É sobre
+              se olhar com mais carinho, sentir-se bem consigo mesma e valorizar
+              aquilo que já existe em você.&rdquo;
+            </p>
+            <p className="mt-4 font-sans text-[15px] leading-relaxed text-ink-soft">
+              Por isso, cada atendimento começa com escuta, avaliação e
+              compreensão das suas necessidades, para que o tratamento seja
+              pensado de forma individualizada.
+            </p>
+            <footer className="mt-4 font-sans text-sm font-semibold tracking-wide text-wine-700">
+              Thays Flor
+            </footer>
+          </motion.blockquote>
         </div>
       </div>
     </section>
