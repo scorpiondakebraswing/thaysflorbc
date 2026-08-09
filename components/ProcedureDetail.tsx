@@ -3,20 +3,26 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import type { ProcedureCategory } from "@/lib/procedures";
 
 type ProcedureDetailProps = {
   title: string;
-  tagline: string;
   description: string;
-  benefits: string[];
+  category: ProcedureCategory;
+  benefits?: string[];
   image?: string;
   isNew?: boolean;
 };
 
+const CATEGORY_LABEL: Record<ProcedureCategory, string> = {
+  facial: "Procedimento Facial",
+  corporal: "Procedimento Corporal",
+};
+
 export default function ProcedureDetail({
   title,
-  tagline,
   description,
+  category,
   benefits,
   image,
   isNew,
@@ -34,16 +40,20 @@ export default function ProcedureDetail({
             ← Voltar aos procedimentos
           </Link>
 
-          {isNew && (
-            <span className="mt-6 inline-block rounded-full bg-wine-700 px-3 py-1 font-sans text-xs font-semibold text-cream">
-              Novidade
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-wine-700">
+              {CATEGORY_LABEL[category]}
             </span>
-          )}
+            {isNew && (
+              <span className="rounded-full bg-wine-700 px-3 py-1 font-sans text-xs font-semibold text-cream">
+                Novidade
+              </span>
+            )}
+          </div>
 
-          <h1 className="mt-4 font-display text-4xl leading-tight text-wine-900 sm:text-5xl">
+          <h1 className="mt-3 font-display text-4xl leading-tight text-wine-900 sm:text-5xl">
             {title}
           </h1>
-          <p className="mt-3 font-sans text-lg text-ink-soft">{tagline}</p>
 
           {image && (
             <div className="relative mt-10 h-64 w-full overflow-hidden rounded-[1.75rem] sm:h-96">
@@ -55,19 +65,23 @@ export default function ProcedureDetail({
             {description}
           </p>
 
-          <div className="mt-10 rounded-[1.75rem] border border-stone-200 bg-white/60 p-7 sm:p-8">
-            <h2 className="font-display text-xl text-wine-900">Benefícios</h2>
-            <ul className="mt-5 flex flex-col gap-3">
-              {benefits.map((benefit) => (
-                <li key={benefit} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-wine-100 text-wine-700">
-                    <Check size={13} strokeWidth={2.5} />
-                  </span>
-                  <span className="font-sans text-[15px] text-ink">{benefit}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {benefits && benefits.length > 0 && (
+            <div className="mt-10 rounded-[1.75rem] border border-stone-200 bg-white/60 p-7 sm:p-8">
+              <h2 className="font-display text-xl text-wine-900">Benefícios</h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-wine-100 text-wine-700">
+                      <Check size={13} strokeWidth={2.5} />
+                    </span>
+                    <span className="font-sans text-[15px] text-ink">
+                      {benefit}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Link
