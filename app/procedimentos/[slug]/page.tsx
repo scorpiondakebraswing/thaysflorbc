@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   return {
     title: `${procedure.title} | Thays Flor`,
-    description: procedure.description,
+    description: procedure.summary,
   };
 }
 
@@ -39,6 +39,7 @@ export default async function ProcedurePage({
       title={procedure.title}
       description={procedure.description}
       benefits={procedure.benefits}
+      indications={procedure.indications}
       image={procedure.image}
       isNew={procedure.isNew}
       category={procedure.category}

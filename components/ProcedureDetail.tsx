@@ -10,6 +10,7 @@ type ProcedureDetailProps = {
   description: string;
   category: ProcedureCategory;
   benefits?: string[];
+  indications?: string[];
   image?: string;
   isNew?: boolean;
 };
@@ -24,6 +25,7 @@ export default function ProcedureDetail({
   description,
   category,
   benefits,
+  indications,
   image,
   isNew,
 }: ProcedureDetailProps) {
@@ -77,6 +79,22 @@ export default function ProcedureDetail({
                     <span className="font-sans text-[15px] text-ink">
                       {benefit}
                     </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {indications && indications.length > 0 && (
+            <div className="mt-6 rounded-[1.75rem] border border-stone-200 bg-nude/60 p-7 sm:p-8">
+              <h2 className="font-display text-xl text-wine-900">
+                Indicado para
+              </h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {indications.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-wine-700" />
+                    <span className="font-sans text-[15px] text-ink">{item}</span>
                   </li>
                 ))}
               </ul>
