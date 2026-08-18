@@ -57,12 +57,18 @@ const tooltipStyle = {
 
 const legendStyle = { fontSize: 13, fontFamily: "var(--font-sans)" };
 
+/**
+ * O Recharts tipa o valor do tooltip como possivelmente indefinido,
+ * então o formatador precisa aceitar unknown em vez de number.
+ */
+const formatarValor = (v: unknown) => formatBRL(Number(v ?? 0));
+
 const eixoY = {
   tick: { fontSize: 12, fill: "#5C4F49" },
-  tickFormatter: (v: number) =>
-    Math.abs(Number(v)) >= 1000
-      ? `${(Number(v) / 1000).toFixed(0)}k`
-      : String(v),
+  tickFormatter: (v: unknown) => {
+    const n = Number(v ?? 0);
+    return Math.abs(n) >= 1000 ? `${(n / 1000).toFixed(0)}k` : String(n);
+  },
 };
 
 /**
@@ -85,7 +91,7 @@ export function GraficoCompetencias({ data }: { data: MonthlyPoint[] }) {
           <YAxis {...eixoY} />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={formatarValor}
           />
           <Legend wrapperStyle={legendStyle} />
           <ReferenceLine y={0} stroke="#5C4F49" strokeWidth={1} />
@@ -135,12 +141,14 @@ export function GraficoClassificacao({
           </Pie>
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number, _n, item) => [
-              `${formatBRL(Number(v))} (${Number(
-                (item?.payload as ClassificationSlice)?.share ?? 0
-              ).toFixed(0)}%)`,
-              (item?.payload as ClassificationSlice)?.name ?? "",
-            ]}
+            formatter={(v: unknown, _nome: unknown, item: unknown) => {
+              const slice = (item as { payload?: ClassificationSlice })?.payload;
+              const percentual = Number(slice?.share ?? 0).toFixed(0);
+              return [
+                `${formatBRL(Number(v ?? 0))} (${percentual}%)`,
+                slice?.name ?? "",
+              ];
+            }}
           />
           <Legend wrapperStyle={legendStyle} />
         </PieChart>
@@ -165,7 +173,7 @@ export function GraficoClassificacaoMensal({ data }: { data: MonthlyPoint[] }) {
           <YAxis {...eixoY} />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={formatarValor}
           />
           <Legend wrapperStyle={legendStyle} />
           <Bar
@@ -209,7 +217,7 @@ export function GraficoSaldo({ data }: { data: MonthlyPoint[] }) {
           <YAxis {...eixoY} />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={formatarValor}
           />
           <ReferenceLine y={0} stroke="#5C4F49" strokeDasharray="4 4" />
           <Line
@@ -250,7 +258,7 @@ export function GraficoDistribuicao({ data }: { data: BreakdownSlice[] }) {
           </Pie>
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={formatarValor}
           />
           <Legend wrapperStyle={legendStyle} />
         </PieChart>
@@ -279,7 +287,7 @@ export function GraficoMaioresGastos({ data }: { data: BreakdownSlice[] }) {
           />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={formatarValor}
           />
           <Bar dataKey="value" name="Total" fill="#93435F" radius={[0, 6, 6, 0]} />
         </BarChart>
