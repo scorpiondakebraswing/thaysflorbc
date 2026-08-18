@@ -2,7 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { buildSummaryForAI, type Scope, type Kind } from "@/lib/finance/engine";
+import {
+  buildSummaryForAI,
+  type Classification,
+  type Kind,
+  type Scope,
+} from "@/lib/finance/engine";
 
 async function exigirAdmin() {
   const supabase = await createClient();
@@ -74,6 +79,8 @@ export async function criarLancamento(data: {
   description: string;
   amount: number;
   occurredOn: string;
+  competence: string;
+  classification: Classification | null;
 }) {
   const { supabase, user } = await exigirAdmin();
   if (!user) return { error: "Sessão expirada. Entre novamente." };
@@ -85,6 +92,12 @@ export async function criarLancamento(data: {
     return { error: "Informe um valor maior que zero." };
   }
   if (!data.occurredOn) return { error: "Informe a data do lançamento." };
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(data.competence)) {
+    return { error: "Competência inválida." };
+  }
+  if (data.kind === "expense" && !data.classification) {
+    return { error: "Classifique a saída como necessária, útil ou fútil." };
+  }
 
   const { error } = await supabase.from("transactions").insert({
     scope: data.scope,
@@ -92,6 +105,9 @@ export async function criarLancamento(data: {
     description,
     amount: data.amount,
     occurred_on: data.occurredOn,
+    competence: data.competence,
+    // Entradas não recebem classificação.
+    classification: data.kind === "expense" ? data.classification : null,
     created_by: user.id,
   });
 
@@ -112,6 +128,26 @@ export async function removerLancamento(id: string) {
   return { success: true };
 }
 
+/** Permite corrigir a classificação de uma saída já lançada. */
+export async function reclassificarLancamento(
+  id: string,
+  classification: Classification
+) {
+  const { supabase, user } = await exigirAdmin();
+  if (!user) return { error: "Sessão expirada. Entre novamente." };
+
+  const { error } = await supabase
+    .from("transactions")
+    .update({ classification })
+    .eq("id", id)
+    .eq("kind", "expense");
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/financas");
+  return { success: true };
+}
+
 // ============================================================
 // SUGESTÕES DA IA
 // ============================================================
@@ -120,11 +156,17 @@ const PROMPT_SISTEMA = `Você é um consultor financeiro que atende uma profissi
 
 Analise o resumo financeiro em JSON e escreva sugestões práticas e específicas.
 
+Contexto importante: os gastos são classificados por ela em tres tipos.
+- Necessario: sem ele algo para de funcionar.
+- Util: nao e indispensavel, mas traz retorno real.
+- Futil: impulso ou prazer momentaneo, poderia ser cortado sem prejuizo.
+
 Regras:
 - Responda em português do Brasil, com tom respeitoso e direto, tratando a pessoa por "você".
-- Cite valores concretos do resumo para embasar cada ponto.
-- Foque em: onde há gasto desnecessário ou desproporcional, o que priorizar, e um próximo passo concreto.
-- Não use travessão (—) em nenhuma hipótese. Use vírgula, ponto ou dois-pontos.
+- Cite valores e percentuais concretos do resumo para embasar cada ponto.
+- Dê atenção especial à proporção de gastos fúteis e à comparação com o mês anterior.
+- Foque em: onde há gasto desnecessário, o que priorizar, e um próximo passo concreto.
+- Não use travessão em nenhuma hipótese. Use vírgula, ponto ou dois-pontos.
 - Não invente dados que não estão no resumo.
 - Se os dados forem escassos, diga isso e sugira o que registrar para uma análise melhor.
 - Não dê conselhos sobre investimentos financeiros específicos (ações, cripto, fundos). Você não é assessor de investimentos.
@@ -135,7 +177,7 @@ Máximo de 4 sugestões. Cada "text" com 2 a 3 frases.`;
 
 export type Suggestion = { title: string; text: string };
 
-export async function gerarSugestoesIA(): Promise<{
+export async function gerarSugestoesIA(competence: string): Promise<{
   suggestions?: Suggestion[];
   error?: string;
 }> {
@@ -158,14 +200,16 @@ export async function gerarSugestoesIA(): Promise<{
 
   const { data: transactions } = await supabase
     .from("transactions")
-    .select("id, scope, kind, description, amount, occurred_on")
+    .select(
+      "id, scope, kind, description, amount, occurred_on, competence, classification"
+    )
     .order("occurred_on", { ascending: true });
 
   if (!transactions || transactions.length === 0) {
     return { error: "Registre alguns lançamentos antes de pedir sugestões." };
   }
 
-  const resumo = buildSummaryForAI(transactions, settings ?? null);
+  const resumo = buildSummaryForAI(transactions, settings ?? null, competence);
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -189,7 +233,9 @@ export async function gerarSugestoesIA(): Promise<{
     });
 
     if (!response.ok) {
-      return { error: "Não foi possível falar com a IA agora. Tente de novo em instantes." };
+      return {
+        error: "Não foi possível falar com a IA agora. Tente de novo em instantes.",
+      };
     }
 
     const payload = await response.json();
