@@ -1,8 +1,23 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+/** Rotas que exigem estar logado como admin ativo. */
+const ROTAS_PROTEGIDAS = ["/financas", "/admin"];
+
+/** Rotas desativadas nesta fase do projeto. */
+const ROTAS_SUSPENSAS = ["/agendar", "/agendamento", "/cadastro"];
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
+
+  const path = request.nextUrl.pathname;
+
+  // Agendamento e autocadastro estão suspensos: manda para a home.
+  if (ROTAS_SUSPENSAS.some((rota) => path.startsWith(rota))) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -29,30 +44,28 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
-  const isProtected = path.startsWith("/agendar") || path.startsWith("/admin");
+  const ehProtegida = ROTAS_PROTEGIDAS.some((rota) => path.startsWith(rota));
 
-  // Não logado tentando acessar área protegida → manda pro login.
-  if (!user && isProtected) {
+  if (!ehProtegida) return supabaseResponse;
+
+  if (!user) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
-    url.searchParams.set("redirect", path);
     return NextResponse.redirect(url);
   }
 
-  // Logado tentando acessar /admin sem ser admin → manda pro painel de usuário.
-  if (user && path.startsWith("/admin")) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role, is_active")
+    .eq("id", user.id)
+    .single();
 
-    if (profile?.role !== "admin") {
-      const url = request.nextUrl.clone();
-      url.pathname = "/agendar";
-      return NextResponse.redirect(url);
-    }
+  // Sem cargo de admin ou com acesso desativado: encerra a sessão.
+  if (profile?.role !== "admin" || !profile?.is_active) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("erro", "Acesso não autorizado.");
+    return NextResponse.redirect(url);
   }
 
   return supabaseResponse;

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import Link from "next/link";
 import PetalMotif from "./PetalMotif";
 
 const fadeUp: Variants = {
@@ -67,12 +66,14 @@ export default function Hero() {
             custom={3}
             className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
           >
-            <Link
-              href="/agendar"
+            <a
+              href="https://wa.me/558888048009"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-wine-700 px-8 py-4 text-center font-sans text-[15px] font-semibold text-cream shadow-md transition-all hover:bg-wine-800 hover:shadow-lg active:scale-[0.98]"
             >
               Agendar Consulta
-            </Link>
+            </a>
             <a
               href="/#procedimentos"
               className="rounded-full border border-wine-700/25 px-8 py-4 text-center font-sans text-[15px] font-semibold text-wine-800 transition-colors hover:bg-wine-100 active:scale-[0.98]"

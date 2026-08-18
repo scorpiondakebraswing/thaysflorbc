@@ -4,9 +4,9 @@ import { login } from "./actions";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ erro?: string; sucesso?: string; redirect?: string }>;
+  searchParams: Promise<{ erro?: string; sucesso?: string }>;
 }) {
-  const { erro, sucesso, redirect } = await searchParams;
+  const { erro, sucesso } = await searchParams;
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-cream px-5 py-16">
@@ -15,9 +15,9 @@ export default async function LoginPage({
           ← Voltar ao site
         </Link>
 
-        <h1 className="mt-6 font-display text-3xl text-wine-900">Entrar</h1>
+        <h1 className="mt-6 font-display text-3xl text-wine-900">Acesso restrito</h1>
         <p className="mt-2 font-sans text-[15px] text-ink-soft">
-          Acesse sua conta para ver ou solicitar agendamentos.
+          Área administrativa da TF Beauty Clinic.
         </p>
 
         {sucesso && (
@@ -33,27 +33,35 @@ export default async function LoginPage({
         )}
 
         <form action={login} className="mt-7 flex flex-col gap-4">
-          <input type="hidden" name="redirect" value={redirect || "/agendar"} />
-
           <div>
-            <label className="mb-1.5 block font-sans text-sm font-medium text-ink">
-              E-mail
+            <label
+              htmlFor="username"
+              className="mb-1.5 block font-sans text-sm font-medium text-ink"
+            >
+              Usuário
             </label>
             <input
-              type="email"
-              name="email"
+              id="username"
+              type="text"
+              name="username"
               required
-              autoComplete="email"
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
               className="w-full rounded-xl border border-stone-200 bg-cream px-4 py-3 font-sans text-[15px] text-ink outline-none focus:border-wine-700"
-              placeholder="seu@email.com"
+              placeholder="seu.usuario"
             />
           </div>
 
           <div>
-            <label className="mb-1.5 block font-sans text-sm font-medium text-ink">
+            <label
+              htmlFor="password"
+              className="mb-1.5 block font-sans text-sm font-medium text-ink"
+            >
               Senha
             </label>
             <input
+              id="password"
               type="password"
               name="password"
               required
@@ -71,16 +79,9 @@ export default async function LoginPage({
           </button>
         </form>
 
-        <p className="mt-6 text-center font-sans text-sm text-ink-soft">
-          Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="font-semibold text-wine-700 hover:underline">
-            Cadastre-se
-          </Link>
-        </p>
-        <p className="mt-2 text-center font-sans text-sm text-ink-soft">
-          <Link href="/esqueci-senha" className="text-wine-700 hover:underline">
-            Esqueci minha senha
-          </Link>
+        <p className="mt-6 text-center font-sans text-xs leading-relaxed text-ink-soft">
+          Esqueceu a senha ou perdeu o acesso? Fale com a administradora para
+          receber uma nova senha.
         </p>
       </div>
     </main>

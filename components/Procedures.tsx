@@ -164,12 +164,14 @@ export default function Procedures() {
               Fale com a equipe e monte um plano de cuidado sob medida para você.
             </p>
           </div>
-          <Link
-            href="/agendar"
+          <a
+            href="https://wa.me/558888048009"
+            target="_blank"
+            rel="noopener noreferrer"
             className="shrink-0 rounded-full bg-cream px-7 py-3.5 font-sans text-sm font-semibold text-wine-800 transition-transform hover:scale-[1.03]"
           >
             Agendar Consulta
-          </Link>
+          </a>
         </div>
       </div>
     </section>

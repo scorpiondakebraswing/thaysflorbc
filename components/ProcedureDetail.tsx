@@ -102,12 +102,14 @@ export default function ProcedureDetail({
           )}
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/agendar"
+            <a
+              href="https://wa.me/558888048009"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-wine-700 px-8 py-4 text-center font-sans text-[15px] font-semibold text-cream transition-colors hover:bg-wine-800"
             >
               Agendar Consulta
-            </Link>
+            </a>
             <a
               href="https://wa.me/558888048009"
               target="_blank"
