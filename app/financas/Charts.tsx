@@ -68,7 +68,7 @@ export function GraficoMensal({ data }: { data: MonthlyPoint[] }) {
           />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={(v: any) => formatBRL(Number(v || 0))}
           />
           <Legend wrapperStyle={{ fontSize: 13, fontFamily: "var(--font-sans)" }} />
           <Bar dataKey="income" name="Entradas" fill="#6E2439" radius={[6, 6, 0, 0]} />
@@ -97,7 +97,7 @@ export function GraficoSaldo({ data }: { data: MonthlyPoint[] }) {
           />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={(v: any) => formatBRL(Number(v || 0))}
           />
           <Line
             type="monotone"
@@ -137,7 +137,7 @@ export function GraficoDistribuicao({ data }: { data: BreakdownSlice[] }) {
           </Pie>
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={(v: any) => formatBRL(Number(v || 0))}
           />
           <Legend wrapperStyle={{ fontSize: 13, fontFamily: "var(--font-sans)" }} />
         </PieChart>
@@ -170,7 +170,7 @@ export function GraficoMaioresGastos({ data }: { data: BreakdownSlice[] }) {
           />
           <Tooltip
             contentStyle={tooltipStyle}
-            formatter={(v: number) => formatBRL(Number(v))}
+            formatter={(v: any) => formatBRL(Number(v || 0))}
           />
           <Bar dataKey="value" name="Total" fill="#93435F" radius={[0, 6, 6, 0]} />
         </BarChart>
