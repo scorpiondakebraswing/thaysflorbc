@@ -35,9 +35,7 @@ export default async function FinancasPage() {
 
   const { data: transactions } = await supabase
     .from("transactions")
-    .select(
-      "id, scope, kind, description, amount, occurred_on, competence, classification"
-    )
+    .select("id, scope, kind, description, amount, occurred_on")
     .order("occurred_on", { ascending: false });
 
   return (
@@ -53,7 +51,13 @@ export default async function FinancasPage() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/produtos"
+              className="rounded-full border border-wine-700/25 px-5 py-2.5 font-sans text-sm font-medium text-wine-800 hover:bg-wine-100"
+            >
+              Produtos
+            </Link>
             <Link
               href="/admin/usuarios"
               className="rounded-full border border-wine-700/25 px-5 py-2.5 font-sans text-sm font-medium text-wine-800 hover:bg-wine-100"
