@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /** Rotas que exigem estar logado como admin ativo. */
-const ROTAS_PROTEGIDAS = ["/financas", "/admin"];
+const ROTAS_PROTEGIDAS = ["/financas", "/produtos", "/admin"];
 
 /** Rotas desativadas nesta fase do projeto. */
 const ROTAS_SUSPENSAS = ["/agendar", "/agendamento", "/cadastro"];
