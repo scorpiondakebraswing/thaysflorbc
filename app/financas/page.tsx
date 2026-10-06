@@ -35,7 +35,9 @@ export default async function FinancasPage() {
 
   const { data: transactions } = await supabase
     .from("transactions")
-    .select("id, scope, kind, description, amount, occurred_on")
+    .select(
+      "id, scope, kind, description, amount, occurred_on, competence, classification"
+    )
     .order("occurred_on", { ascending: false });
 
   return (
